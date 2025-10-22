@@ -1,0 +1,34 @@
+name = "Tmux"
+desc = "Terminal Multiplex"
+repo = [ "https://github.com/tmux/tmux.git" ]
+
+[build]
+# https://github.com/tmux/tmux/wiki/Installing#from-source-tarball
+# dependencies = [ "SEE OVERRIDES" ]
+command = '''
+./autogen.sh
+./configure
+make
+'''
+
+[install]
+priviledged = true
+prerequisites = [ "build" ]
+dependencies = [ "libevent", "ncurses" ]
+command = '''
+cp $OUT/bin/tmux /usr/bin/tmux
+'''
+
+[update]
+prerequisites = [ "uninstall", "build", "install" ]
+
+[uninstall]
+command = '''
+rm /usr/bin/tmux
+'''
+
+[purge]
+command = '''
+rm ~/.tmux.conf
+rm ~/.tmux_history
+'''

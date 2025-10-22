@@ -1,0 +1,2 @@
+[build]
+dependencies = [ "gcc", "make", "automake", "pkgconfig", "libevent-devel", "ncurses-devel", "git", "bison" ]

@@ -10,6 +10,7 @@ template_{DISTROID}_{RELEASEID}_{ARCHITECTURE}.toml
 ```toml
 name = "Name of Package"
 desc = "Description of Package"
+repo = [ "urls", "for", "source" ]
 
 [build]
 command = '''

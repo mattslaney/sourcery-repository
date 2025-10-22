@@ -1,0 +1,2 @@
+[build]
+dependencies = [ "libevent-devel", "ncurses-devel", "gcc", "make", "bison", "pkg-config" ]
