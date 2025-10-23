@@ -1,0 +1,5 @@
+name = "clidev"
+desc = "A collection of packages useful for development in a cli-only environment"
+type = "collection"
+categories = [ "development", "cli" ]
+packages = [ "tmux", "vim" ]

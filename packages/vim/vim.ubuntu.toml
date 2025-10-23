@@ -3,15 +3,17 @@ desc = "Vi iMproved"
 repo = [ "https://github.com/vim/vim.git" ]
 
 [build]
+# https://github.com/vim/vim/blob/master/src/INSTALL
+dependencies = [ "git", "make", "clang", "libtool-bin" ]
 command = '''
-# build commands, installing dependencies
-# environment setup, etc
+make
 '''
+artifacts = [ "bin/vim" ]
 
 [install]
 prerequisites = [ "build" ]
 command = '''
-# installation steps
+
 '''
 
 [update]

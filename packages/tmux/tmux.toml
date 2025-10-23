@@ -1,6 +1,7 @@
 name = "Tmux"
 desc = "Terminal Multiplex"
 repo = [ "https://github.com/tmux/tmux.git" ]
+branch = "master"
 
 [build]
 # https://github.com/tmux/tmux/wiki/Installing#from-source-tarball
@@ -10,6 +11,7 @@ command = '''
 ./configure
 make
 '''
+artifacts = [ "bin/tmux" ]
 
 [install]
 priviledged = true

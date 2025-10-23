@@ -1,0 +1,34 @@
+name = "Neovim"
+desc = "Modern replacement for vim"
+repo = [ "https://github.com/neovim/neovim.git" ]
+branch = "stable"
+type = "editor"
+categories = [ "development", "cli" ]
+
+[build]
+command = '''
+make CMAKE_BUILD_TYPE=Release
+'''
+artifacts = [ "build/bin/nvim" ]
+
+[install]
+prerequisites = [ "build" ]
+command = '''
+# installation steps
+'''
+
+[update]
+prerequisites = [ "build" ]
+command = '''
+# update steps
+'''
+
+[uninstall]
+command = '''
+# uninstall steps
+'''
+
+[purge]
+command = '''
+# purge steps
+'''

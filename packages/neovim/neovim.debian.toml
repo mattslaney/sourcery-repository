@@ -1,0 +1,2 @@
+[build]
+dependencies = [ "ninja-build", "gettext", "cmake", "curl", "build-essential", "git" ]

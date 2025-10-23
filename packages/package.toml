@@ -4,30 +4,45 @@
 name = "Name of Package"
 desc = "Description of Package"
 repo = [ "urls", "for", "source" ]
+# the default branch to use for the package
+branch = "main branch name"
 
+# Build stage, for building the package from source
 [build]
+# The dependenices will be installed using the package manager for the system
+# if they are not already installed.
+dependencies = [ "dependencies", "for", "build" ]
+# The command that will be executed for this stage
 command = '''
 # build commands, installing dependencies
 # environment setup, etc
 '''
+# The artifacts will be copied to the output folder
+artifacts = [ "artifacts", "from", "build" ]
 
+# Install stage, for installing the package on the system
 [install]
+privileged = true
+# Prerequisite stages will be executed in order before this stage.
 prerequisites = [ "build" ]
 command = '''
 # installation steps
 '''
 
+# Update stage, for updating the package on the system
 [update]
 prerequisites = [ "build" ]
 command = '''
 # update steps
 '''
 
+# Uninstall stage, for uninstalling the package from the system
 [uninstall]
 command = '''
 # uninstall steps
 '''
 
+# Purge stage, for purging the package and data from the system
 [purge]
 command = '''
 # purge steps

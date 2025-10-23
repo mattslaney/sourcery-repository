@@ -1,0 +1,60 @@
+name = "Niri"
+desc = "A scrollable-tiling Wayland compositor"
+repo = [ "https://github.com/YaLTeR/niri.git" ]
+branch = "main"
+type = "compositor"
+categories = [ "wayland", "compositor" ]
+
+[build]
+dependencies = [ "cargo", "rustc" ]
+command = '''
+cargo build --release
+'''
+artifacts = [ 
+    "target/release/niri",
+    "resources/niri-session",
+    "resources/niri.desktop",
+    "resources/niri.desktop",
+    "resources/niri.service",
+    "resources/niri-shutdown.target",
+    "resources/dinit/niri",
+    "resources/dinit/niri-shutdown",
+]
+
+[install]
+prerequisites = [ "build" ]
+command = '''
+cp $OUT/target/release/niri /usr/local/bin/niri
+cp $OUT/resources/niri-session /usr/share/wayland-sessions/niri-session
+cp $OUT/resources/niri.desktop /usr/share/wayland-sessions/niri.desktop
+if [ -d /etc/systemd ]; then
+    cp $OUT/resources/niri.service /etc/systemd/system/niri.service
+    cp $OUT/resources/niri-shutdown.target /etc/systemd/system/niri-shutdown.target
+fi
+if [ -d /etc/dinit ]; then
+    cp $OUT/resources/dinit/niri /etc/dinit.d/niri
+    cp $OUT/resources/dinit/niri-shutdown /etc/dinit.d/niri-shutdown
+fi
+'''
+
+[update]
+prerequisites = [ "uninstall", "build", "install" ]
+
+[uninstall]
+command = '''
+rm /usr/local/bin/niri
+rm /usr/share/wayland-sessions/niri-session
+rm /usr/share/wayland-sessions/niri.desktop
+rm /etc/systemd/system/niri.service
+rm /etc/systemd/system/niri-shutdown.target
+rm /etc/dinit.d/niri
+rm /etc/dinit.d/niri-shutdown
+'''
+
+[purge]
+prerequisites = [ "uninstall" ]
+command = '''
+rm -rf ~/.config/niri
+rm -rf ~/.local/share/niri
+rm -rf ~/.cache/niri
+'''
