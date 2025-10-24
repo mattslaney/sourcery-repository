@@ -8,7 +8,7 @@ dependencies = [ "git", "make", "clang", "libtool-bin" ]
 command = '''
 make
 '''
-artifacts = [ "bin/vim" ]
+artifacts = [ "src/vim" ]
 
 [install]
 prerequisites = [ "build" ]
