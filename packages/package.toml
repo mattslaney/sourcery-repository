@@ -23,6 +23,9 @@ artifacts = [ "artifacts", "from", "build" ]
 # Install stage, for installing the package on the system
 [install]
 privileged = true
+# Installation scope restrictions: ["system"], ["user"], or ["system", "user"]
+# If not provided or empty, both scopes are allowed
+# scope = [ "system", "user" ]
 # Prerequisite stages will be executed in order before this stage.
 prerequisites = [ "build" ]
 command = '''

@@ -11,14 +11,15 @@ command = '''
 ./configure
 make
 '''
-artifacts = [ "bin/tmux" ]
+artifacts = [ "tmux" ]
 
 [install]
-priviledged = true
 prerequisites = [ "build" ]
 dependencies = [ "libevent", "ncurses" ]
 command = '''
-cp $OUT/bin/tmux /usr/bin/tmux
+mkdir -p $SCRY_BINDIR
+cp $SCRY_ARTIFACTS/tmux $SCRY_BINDIR/tmux
+chmod +x $SCRY_BINDIR/tmux
 '''
 
 [update]
@@ -26,11 +27,11 @@ prerequisites = [ "uninstall", "build", "install" ]
 
 [uninstall]
 command = '''
-rm /usr/bin/tmux
+rm -f $SCRY_BINDIR/tmux
 '''
 
 [purge]
 command = '''
-rm ~/.tmux.conf
-rm ~/.tmux_history
+rm -f ~/.tmux.conf
+rm -f ~/.tmux_history
 '''

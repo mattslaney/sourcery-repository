@@ -22,18 +22,22 @@ artifacts = [
 ]
 
 [install]
+scope = [ "system" ]
 prerequisites = [ "build" ]
 command = '''
-cp $OUT/target/release/niri /usr/local/bin/niri
-cp $OUT/resources/niri-session /usr/share/wayland-sessions/niri-session
-cp $OUT/resources/niri.desktop /usr/share/wayland-sessions/niri.desktop
+mkdir -p /usr/share/wayland-sessions
+cp $SCRY_ARTIFACTS/target/release/niri /usr/local/bin/niri
+cp $SCRY_ARTIFACTS/resources/niri-session /usr/share/wayland-sessions/niri-session
+cp $SCRY_ARTIFACTS/resources/niri.desktop /usr/share/wayland-sessions/niri.desktop
+chmod +x /usr/local/niri
+chmod +x /usr/share/wayland-sessions/niri-session
 if [ -d /etc/systemd ]; then
-    cp $OUT/resources/niri.service /etc/systemd/system/niri.service
-    cp $OUT/resources/niri-shutdown.target /etc/systemd/system/niri-shutdown.target
+    cp $SCRY_ARTIFACTS/resources/niri.service /etc/systemd/system/niri.service
+    cp $SCRY_ARTIFACTS/resources/niri-shutdown.target /etc/systemd/system/niri-shutdown.target
 fi
 if [ -d /etc/dinit ]; then
-    cp $OUT/resources/dinit/niri /etc/dinit.d/niri
-    cp $OUT/resources/dinit/niri-shutdown /etc/dinit.d/niri-shutdown
+    cp $SCRY_ARTIFACTS/resources/dinit/niri /etc/dinit.d/niri
+    cp $SCRY_ARTIFACTS/resources/dinit/niri-shutdown /etc/dinit.d/niri-shutdown
 fi
 '''
 
@@ -42,13 +46,13 @@ prerequisites = [ "uninstall", "build", "install" ]
 
 [uninstall]
 command = '''
-rm /usr/local/bin/niri
-rm /usr/share/wayland-sessions/niri-session
-rm /usr/share/wayland-sessions/niri.desktop
-rm /etc/systemd/system/niri.service
-rm /etc/systemd/system/niri-shutdown.target
-rm /etc/dinit.d/niri
-rm /etc/dinit.d/niri-shutdown
+rm -f /usr/local/niri
+rm -f /usr/share/wayland-sessions/niri-session
+rm -f /usr/share/wayland-sessions/niri.desktop
+rm -f /etc/systemd/system/niri.service
+rm -f /etc/systemd/system/niri-shutdown.target
+rm -f /etc/dinit.d/niri
+rm -f /etc/dinit.d/niri-shutdown
 '''
 
 [purge]

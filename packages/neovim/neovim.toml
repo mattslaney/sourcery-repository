@@ -14,7 +14,9 @@ artifacts = [ "build/bin/nvim" ]
 [install]
 prerequisites = [ "build" ]
 command = '''
-# installation steps
+mkdir -p $SCRY_BINDIR
+cp $SCRY_ARTIFACTS/build/bin/nvim $SCRY_BINDIR/nvim
+chmod +x $SCRY_BINDIR/nvim
 '''
 
 [update]
@@ -25,7 +27,7 @@ command = '''
 
 [uninstall]
 command = '''
-# uninstall steps
+rm -f $SCRY_BINDIR/nvim
 '''
 
 [purge]

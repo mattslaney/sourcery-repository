@@ -1,3 +1,24 @@
 name = "Vim"
 desc = "Vi iMproved"
 repo = [ "https://github.com/vim/vim.git" ]
+branch = "master"
+
+[build]
+command = '''
+./configure --prefix=$SCRY_PREFIX
+make
+'''
+artifacts = [ "src/vim" ]
+
+[install]
+prerequisites = [ "build" ]
+command = '''
+mkdir -p $SCRY_BINDIR
+cp $SCRY_ARTIFACTS/src/vim $SCRY_BINDIR/vim
+chmod +x $SCRY_BINDIR/vim
+'''
+
+[uninstall]
+command = '''
+rm -f $SCRY_BINDIR/vim
+'''
